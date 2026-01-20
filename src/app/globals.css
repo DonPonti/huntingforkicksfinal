@@ -24,3 +24,26 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@layer base {
+  /* Brutalist Focus States */
+  input:focus, textarea:focus, select:focus {
+    @apply outline-none ring-0 border-black border-2;
+  }
+  
+  /* Make all headings tight and sharp */
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+/* Custom scrollbar for that raw feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fff; 
+  border-left: 1px solid #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #000; 
+}
