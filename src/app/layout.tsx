@@ -15,16 +15,19 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 // 1. GOD LEVEL SEO METADATA (Server Side Only)
 // ---------------------------------------------------------
 export const metadata: Metadata = {
-  metadataBase: new URL('https://huntingforkicks.netlify.app'), 
+  metadataBase: new URL('https://huntingforkicks.com'), 
   title: {
     default: "HUNTING FOR KICKS | Sneaker Culture & Tools",
     template: "%s | HFK®" 
+  },
+  verification: {
+    google: "_id9bpWau5RTqOu8c_2VMC6eLoMuXZyZqQWhDVvA8IY",
   },
   description: "The intersection of sneaker culture, digital tools, and brutalist design. Based in India.",
   openGraph: {
     title: "HUNTING FOR KICKS",
     description: "Sneaker culture, size converters, and brutalist design.",
-    url: 'https://huntingforkicks.netlify.app',
+    url: 'https://huntingforkicks.com',
     siteName: 'Hunting For Kicks',
     locale: 'en_US',
     type: 'website',
