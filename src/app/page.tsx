@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
         
         <p className="font-mono text-xs uppercase max-w-md leading-relaxed text-gray-600">
-          The intersection of sneaker culture, digital tools, and brutalist design.
+          The intersection of Sneaker culture, Digital tools, and Cinematic icons.
         </p>
 
       </section>
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="group border-black md:border-l-0 lg:border-l relative flex flex-col h-full bg-black text-white">
              <Link href="/tools/size-converter" className="flex flex-col h-full">
                 <div className="aspect-[3/4] flex items-center justify-center border-b border-white/20">
-                   <h3 className="text-6xl font-mono rotate-90 tracking-widest">TOOL</h3>
+                   <h3 className="text-6xl font-mono rotate-90 tracking-widest">TOOLS</h3>
                 </div>
                 <div className="p-4 flex-1 flex flex-col justify-between">
                    <div>

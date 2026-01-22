@@ -23,10 +23,10 @@ export const metadata: Metadata = {
   verification: {
     google: "_id9bpWau5RTqOu8c_2VMC6eLoMuXZyZqQWhDVvA8IY",
   },
-  description: "The intersection of sneaker culture, digital tools, and brutalist design. Based in India.",
+  description: "The intersection of sneaker culture, digital tools, and cinematic icons.",
   openGraph: {
     title: "HUNTING FOR KICKS",
-    description: "Sneaker culture, size converters, and brutalist design.",
+    description: "The intersection of sneaker culture, digital tools, and cinematic icons.",
     url: 'https://huntingforkicks.com',
     siteName: 'Hunting For Kicks',
     locale: 'en_US',
@@ -82,6 +82,9 @@ export default function RootLayout({
               <Link href="/tools" className="flex items-center px-6 border-r border-black hover:bg-black hover:text-white transition-colors">
                 Tools
               </Link>
+              <Link href="/about" className="flex items-center px-6 border-r border-black hover:bg-black hover:text-white transition-colors">
+                About
+              </Link>
             </div>
 
             {/* Mobile Menu */}
@@ -112,8 +115,8 @@ export default function RootLayout({
             <div>
                <h4 className="mb-4 font-bold text-gray-400">Legal</h4>
                <ul className="space-y-2">
-                 <li><a href="#" className="hover:text-gray-500">Terms of Use</a></li>
-                 <li><a href="#" className="hover:text-gray-500">Privacy Policy</a></li>
+                 <li><a href="/terms" className="hover:text-gray-500">Terms of Use</a></li>
+                 <li><a href="/privacy" className="hover:text-gray-500">Privacy Policy</a></li>
                </ul>
             </div>
             <div className="hidden md:block"></div>
