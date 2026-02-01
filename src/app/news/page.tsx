@@ -30,7 +30,7 @@ export default function BlogIndex() {
         {/* We add 'index' here to handle priority loading */}
         {allPosts.map((post, index) => (
           <article key={post.slug} className="group relative border-b md:border-b-0 border-black last:border-b-0">
-            <Link href={`/blog/${post.slug}`} className="block h-full">
+            <Link href={`/news/${post.slug}`} className="block h-full">
               
               {/* Image Aspect 3:4 - Optimized */}
               <div className="aspect-[3/4] bg-gray-200 relative overflow-hidden">
