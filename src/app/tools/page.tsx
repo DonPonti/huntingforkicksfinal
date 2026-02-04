@@ -53,18 +53,7 @@ export default function ToolsPage() {
           </div>
         </Link>
 
-         {/* LINKED TOOL 4: Size Converter 2 */}
-        <Link href="/tools/shoe-size-converter" className="group">
-          <div className="border border-black p-6 h-full hover:bg-black hover:text-white transition-colors cursor-pointer rounded-lg">
-            <h3 className="text-xl font-bold mb-2">Shoe Size Converter</h3>
-            <p className="text-sm text-gray-500 group-hover:text-gray-300 mb-4">
-              shoe size converter by different brands.
-            </p>
-            <span className="text-xs font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded group-hover:bg-blue-900 group-hover:text-white">
-              READY
-            </span>
-          </div>
-        </Link>
+         
 
         {/* PLACEHOLDER: More Coming Soon */}
         <div className="border border-dashed border-gray-300 p-6 opacity-60 rounded-lg flex flex-col justify-center items-center text-center">
