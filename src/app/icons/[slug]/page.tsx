@@ -1,105 +1,181 @@
-import { getIconBySlug, getAllIcons } from '@/lib/icons-api'
+import { cultureDex, assets } from '@/lib/culturedex'
 import { notFound } from 'next/navigation'
-import { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
-// 1. We update the type to expect a Promise
 type Props = {
   params: Promise<{
     slug: string
   }>
 }
 
-// 2. Add 'async' and 'await params' to the Metadata
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export default async function CultureDexProfile(props: Props) {
   const params = await props.params;
-  const icon = getIconBySlug(params.slug, ['name', 'alias'])
-  
-  if (!icon.name) return {}
-  
-  return {
-    title: `${icon.name} | Sneaker Archive | Hunting For Kicks`,
-    description: `Analyzing the sneaker rotation and cultural impact of ${icon.name}: ${icon.alias}.`,
-  }
-}
+  const icon = cultureDex[params.slug];
 
-// 3. Add 'async' and 'await params' to the main component
-export default async function IconProfile(props: Props) {
-  const params = await props.params;
-  const icon = getIconBySlug(params.slug, [
-    'name',
-    'alias',
-    'signatureShoe',
-    'rotation',
-    'brandAffiliation',
-    'firstSignatureYear',
-    'content'
-  ])
-
-  if (!icon.name) return notFound()
-
-  const rotation = icon.rotation as string[] || []
+  if (!icon) return notFound();
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12 md:py-20 min-h-screen">
-      {/* HEADER */}
-      <header className="mb-12 border-b-4 border-black pb-8">
-        <Link href="/icons" className="font-mono text-xs uppercase tracking-widest hover:underline mb-8 block">
-          ← Back to Archive
+    <main className="min-h-screen bg-[#F6F8FA] font-sans text-gray-800 pb-20 overflow-x-hidden">
+      
+      {/* TOP NAVIGATION BANNER - POKEDEX RED */}
+      <div className="w-full bg-[#E3350D] text-white py-4 flex justify-between items-center px-4 md:px-8 text-xs md:text-sm font-bold uppercase tracking-wider mb-6 md:mb-10 shadow-md">
+        <Link href="/icons" className="hover:text-black transition-colors flex items-center gap-2">
+          <span>←</span> 
+          <span className="hidden md:inline">Back to Dex</span>
+          <span className="md:hidden">Back</span>
         </Link>
-        <h1 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85] mb-4">
-          {icon.name}
-        </h1>
-        <p className="font-mono text-sm md:text-base uppercase tracking-widest border-l-4 border-black pl-4 bg-gray-100 py-2 inline-block pr-6">
-          {icon.alias}
-        </p>
-      </header>
-
-      <div className="grid md:grid-cols-3 gap-12">
-        {/* LEFT COL: STATS (The Sidebar) */}
-        <aside className="md:col-span-1 border-t-2 border-black pt-6">
-          <h2 className="font-black text-xl uppercase tracking-tighter mb-6">Database Specs</h2>
-          
-          <div className="mb-6">
-            <p className="font-mono text-xs uppercase text-gray-500 mb-1">Brand Affiliation</p>
-            <p className="font-bold uppercase">{icon.brandAffiliation}</p>
-          </div>
-
-          <div className="mb-6">
-            <p className="font-mono text-xs uppercase text-gray-500 mb-1">First Signature</p>
-            <p className="font-bold uppercase">{icon.firstSignatureYear}</p>
-          </div>
-
-          <div className="mb-6">
-            <p className="font-mono text-xs uppercase text-gray-500 mb-1">Grail/Signature Asset</p>
-            <p className="font-bold uppercase bg-black text-white px-2 py-1 inline-block">{icon.signatureShoe}</p>
-          </div>
-
-          <div className="mb-6">
-            <p className="font-mono text-xs uppercase text-gray-500 mb-2">Known Rotation</p>
-            <ul className="list-disc pl-4 font-bold text-sm uppercase space-y-1">
-              {rotation.map((shoe, idx) => (
-                <li key={idx}>{shoe}</li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-
-        {/* RIGHT COL: ANALYSIS */}
-        <article className="md:col-span-2 border-t-2 border-black pt-6">
-          <h2 className="font-black text-xl uppercase tracking-tighter mb-6">Cultural Analysis</h2>
-          <div className="whitespace-pre-wrap font-serif text-lg leading-relaxed">
-            {icon.content}
-          </div>
-        </article>
+        <span className="flex items-center gap-2 bg-black/20 px-3 py-1 rounded-full">
+          <span className="w-2 h-2 rounded-full bg-[#9bcc50] animate-pulse"></span> 
+          Database Active
+        </span>
       </div>
+
+      {/* TITLE SECTION */}
+      <div className="text-center mb-6 md:mb-10 px-4">
+        <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
+          {icon.name} <span className="text-gray-400 font-medium">#{icon.id}</span>
+        </h1>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-12 gap-6 md:gap-8 w-full">
+        
+        {/* LEFT COLUMN: IMAGE & STATS */}
+        <div className="md:col-span-5 flex flex-col gap-6 w-full">
+          <div className="bg-gradient-to-br from-[#e0e7ff] to-[#c7d2fe] rounded-3xl p-4 md:p-6 aspect-square relative flex items-center justify-center shadow-inner border-4 border-white">
+            {icon.image ? (
+              <Image src={icon.image} alt={icon.name} fill className="object-cover rounded-2xl" />
+            ) : (
+              <span className="text-indigo-400 font-mono font-bold">NO IMAGE DATA</span>
+            )}
+          </div>
+
+          <div className="bg-white rounded-3xl p-5 md:p-6 text-gray-800 shadow-sm border-t-4 border-[#30a7d7]">
+            <h3 className="font-black mb-4 text-sm uppercase tracking-wider text-gray-400">Base Stats</h3>
+            <div className="flex justify-between items-end h-28 md:h-32 gap-1 md:gap-2 w-full">
+              {Object.entries(icon.stats).map(([statName, value]) => (
+                <div key={statName} className="flex flex-col items-center w-full gap-2">
+                  <div className="w-full bg-gray-100 h-20 md:h-24 relative rounded-t-sm overflow-hidden border-b-2 border-gray-300">
+                     <div 
+                        className="absolute bottom-0 w-full bg-[#30a7d7] transition-all duration-1000"
+                        style={{ height: `${value}%` }}
+                     ></div>
+                  </div>
+                  <span className="text-[8px] md:text-[10px] font-black uppercase text-center leading-tight truncate w-full px-1">
+                    {statName}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: DATA & ATTRIBUTES */}
+        <div className="md:col-span-7 flex flex-col gap-6 w-full">
+          <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+            <p className="text-base md:text-lg leading-relaxed text-gray-700 font-medium">
+              {icon.description}
+            </p>
+          </div>
+
+          <div className="bg-[#30a7d7] rounded-3xl p-6 md:p-8 text-white grid grid-cols-2 gap-y-6 gap-x-4 shadow-md">
+            {Object.entries(icon.attributes).map(([key, value]) => (
+              <div key={key} className="break-words pr-2">
+                <span className="block text-xs md:text-sm font-bold uppercase opacity-80 mb-1">{key}</span>
+                <span className="block text-lg md:text-xl font-black text-white leading-tight">{value as string}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100">
+            <div>
+              <h3 className="text-xs md:text-sm font-bold uppercase tracking-wider text-gray-400 mb-3">Type</h3>
+              <div className="flex flex-wrap gap-2">
+                {icon.types.map((type: string) => (
+                  <span key={type} className="bg-[#9bcc50] text-black px-3 py-1.5 rounded-lg text-xs md:text-sm font-black uppercase tracking-wide">
+                    {type}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xs md:text-sm font-bold uppercase tracking-wider text-gray-400 mb-3">Weaknesses</h3>
+              <div className="flex flex-wrap gap-2">
+                {icon.weaknesses.map((weak: string) => (
+                  <span key={weak} className="bg-[#f16e57] text-white px-3 py-1.5 rounded-lg text-xs md:text-sm font-black uppercase tracking-wide">
+                    {weak}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* BOTTOM INVENTORY TABLE (The Affiliate Links Restored) */}
+      <div className="max-w-5xl mx-auto px-4 mt-12 md:mt-16 w-full">
+        <h3 className="text-xl md:text-2xl font-black mb-6 uppercase tracking-tighter text-gray-800 ml-2">Equipped Inventory</h3>
+        
+        {/* Table Container with rounding to match the Pokédex theme */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden w-full">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left min-w-[500px]">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100 text-[10px] md:text-xs uppercase tracking-wider text-gray-500">
+                  <th className="py-4 pl-6 font-bold">Item Asset</th>
+                  <th className="py-4 font-bold">Maker / Brand</th>
+                  <th className="py-4 pr-6 font-bold text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {icon.equipped.map((assetId: string) => {
+                  const asset = assets[assetId];
+                  if (!asset) return null;
+                  return (
+                    <tr key={assetId} className="hover:bg-gray-50 transition-colors group">
+                      
+                      {/* Image + Item Name Column */}
+                      <td className="py-4 pl-6">
+                        <div className="flex items-center gap-4">
+                          <div className="w-16 h-16 relative bg-[#F6F8FA] rounded-xl overflow-hidden border border-gray-200 shrink-0">
+                            {asset.image ? (
+                              <Image src={asset.image} alt={asset.name} fill className="object-contain p-2" />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-[10px] text-gray-400">N/A</div>
+                            )}
+                          </div>
+                          <span className="font-black text-sm md:text-base text-gray-800">{asset.name}</span>
+                        </div>
+                      </td>
+                      
+                      {/* Brand Column */}
+                      <td className="py-4">
+                        <span className="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-wide bg-gray-100 px-3 py-1.5 rounded-full">
+                          {asset.brand}
+                        </span>
+                      </td>
+                      
+                      {/* Affiliate Button Column */}
+                      <td className="py-4 pr-6 text-right">
+                        <a 
+                          href={asset.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-block bg-[#E3350D] text-white text-[10px] md:text-xs uppercase font-black px-5 py-2.5 rounded-full hover:bg-red-700 transition-colors shadow-sm"
+                        >
+                          Find Item
+                        </a>
+                      </td>
+                      
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </main>
   )
-}
-
-export async function generateStaticParams() {
-  const icons = getAllIcons(['slug'])
-  return icons.map((icon) => ({
-    slug: icon.slug,
-  }))
 }

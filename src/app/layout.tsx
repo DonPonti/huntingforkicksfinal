@@ -62,7 +62,8 @@ export default function RootLayout({
   const allSlugs = getAllPosts(["slug"]).map((post) => post.slug);
 
   return (
-    <html lang="en">
+    
+    <html lang="en" >
       <body className={`${inter.variable} ${mono.variable} font-sans bg-white text-black antialiased`}>
         
         {/* --- GLOBAL HEADER --- */}
