@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #111827; /* Sleek Dark Mode Background */
-    --foreground: #f9fafb; /* Bright White Text for readability! */
+    --background: #ffffff; /* Forces White Background */
+    --foreground: #171717; /* Forces Dark Text */
   }
 }
 
