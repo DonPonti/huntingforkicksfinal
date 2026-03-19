@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     
     <html lang="en" >
-      <body className={`${inter.variable} ${mono.variable} font-sans bg-white text-black antialiased`}>
+      <body className={`${inter.variable} ${mono.variable} font-sans bg-[#F6F8FA] dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased transition-colors duration-300`}>
         
         {/* --- GLOBAL HEADER --- */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-black text-xs font-mono uppercase tracking-tight">
