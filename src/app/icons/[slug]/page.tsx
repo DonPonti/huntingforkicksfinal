@@ -20,7 +20,7 @@ export default async function CultureDexProfile(props: Props) {
       
       {/* TOP NAVIGATION BANNER - POKEDEX RED */}
       <div className="w-full bg-[#E3350D] text-white py-4 flex justify-between items-center px-4 md:px-8 text-xs md:text-sm font-bold uppercase tracking-wider mb-6 md:mb-10 shadow-md">
-        <Link href="/icons" className="hover:text-black transition-colors flex items-center gap-2">
+        <Link href="/icons" prefetch={false} className="hover:text-black dark:hover:text-gray-200 transition-colors flex items-center gap-2">
           <span>←</span> 
           <span className="hidden md:inline">Back to Dex</span>
           <span className="md:hidden">Back</span>

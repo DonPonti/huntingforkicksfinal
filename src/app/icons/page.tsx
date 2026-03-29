@@ -87,6 +87,7 @@ export default function CultureDexDirectory() {
               <Link 
                 href={`/icons/${icon.slug}`} 
                 key={icon.slug} 
+                prefetch={false}
                 className="bg-white dark:bg-gray-800 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-[#30a7d7] group flex flex-col relative overflow-hidden transform hover:-translate-y-1"
               >
                 <div className="absolute top-4 left-4 z-10 bg-black/80 text-white text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-widest">
