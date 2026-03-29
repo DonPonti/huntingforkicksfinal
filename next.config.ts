@@ -6,10 +6,12 @@ const nextConfig: NextConfig = {
 
   // 2. IMAGES: Whitelist Unsplash (Security practice: Don't allow "all")
   images: {
+    unoptimized: true, // <--- MOVED HERE: This shuts off the expensive Netlify image server
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        // (Do not put unoptimized: true inside this block)
       },
     ],
   },
