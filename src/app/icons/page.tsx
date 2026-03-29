@@ -5,6 +5,9 @@ import { cultureDex } from '@/lib/culturedex'
 import Link from 'next/link'
 import Image from 'next/image'
 
+
+export const dynamic = 'force-static';
+
 // How many cards do you want per page? (Set to 4 for testing, then bump to 12 later!)
 const ITEMS_PER_PAGE = 4; 
 
